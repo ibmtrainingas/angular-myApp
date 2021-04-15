@@ -13,7 +13,7 @@ export class UserformComponent implements OnInit { //Controller
 
   constructor() { }
   save() {
-    this.userArray.push(this.user);
+    this.userArray.push(Object.assign({}, this.user)); //Creates an object, and passes all the properties of the original object to that new Object
     console.log('working ...');
     console.log(this.user.firstname);
     //this.user.firstname = 'John';
