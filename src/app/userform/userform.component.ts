@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-userform',
@@ -11,13 +12,20 @@ export class UserformComponent implements OnInit { //Controller
   user: User = new User(); //Model
   userArray: User[] = [];
 
-  constructor() { }
+  constructor(private userService: UserServiceService) { }
   save() {
-    this.userArray.push(Object.assign({}, this.user)); //Creates an object, and passes all the properties of the original object to that new Object
-    console.log('working ...');
-    console.log(this.user.firstname);
-    //this.user.firstname = 'John';
-    console.log(this.user.age);
+    const promise = this.userService.save(this.user);
+    promise.subscribe(response => {
+      console.log(response);
+      alert("User added..");
+      this.userArray.push(Object.assign({}, this.user)); //Creates an object, and passes all the properties of the original object to that new Object
+    },
+      error => {
+        console.log(error);
+        alert(error.statusText);
+      }
+
+    )
   }
   ngOnInit(): void {
   }
