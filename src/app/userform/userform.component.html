@@ -7,11 +7,13 @@
   <thead>
     <td>FirstName</td>
     <td>Age</td>
+    <td>DOB</td>
   </thead>
   <tbody>
     <tr *ngFor='let user of userArray'>
       <td>{{user.name}}</td>
       <td>{{user.age}}</td>
+      <td>{{user.dobDate}}</td>
     </tr>
   </tbody>
 </table>
