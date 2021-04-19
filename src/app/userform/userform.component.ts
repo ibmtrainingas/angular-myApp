@@ -13,10 +13,18 @@ export class UserformComponent implements OnInit { //Controller
   userArray: any;
 
   constructor(private userService: UserServiceService) { }
+
+  deleteUser(userId: number, index: number) {
+    const observable = this.userService.delete(userId);
+    observable.subscribe(response => this.userArray.splice(index, 1));
+
+  }
+
   save() {
     const promise = this.userService.save(this.user);
     promise.subscribe(response => {
       console.log(response);
+      this.user.id = response;
       alert("User added..");
       this.userArray.push(Object.assign({}, this.user)); //Creates an object, and passes all the properties of the original object to that new Object
     },

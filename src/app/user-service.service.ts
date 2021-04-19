@@ -8,6 +8,7 @@ const URL = 'http://localhost:8080/user'
 export class UserServiceService {
 
   constructor(private http: HttpClient) { }
+
   save(user: User) {
     return this.http.post(URL, user, {
       headers: { "content-type": 'application/json' }
@@ -16,5 +17,10 @@ export class UserServiceService {
 
   getAllUsers() {
     return this.http.get(URL);
+  }
+
+  delete(userId: number) {
+    return this.http.delete(URL + '/' + userId);
+
   }
 }
