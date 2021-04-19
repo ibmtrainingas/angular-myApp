@@ -10,7 +10,7 @@ import { UserServiceService } from '../user-service.service';
 export class UserformComponent implements OnInit { //Controller
   title: String = 'Userform';
   user: User = new User(); //Model
-  userArray: User[] = [];
+  userArray: any;
 
   constructor(private userService: UserServiceService) { }
   save() {
@@ -28,6 +28,13 @@ export class UserformComponent implements OnInit { //Controller
     )
   }
   ngOnInit(): void {
+    const observable = this.userService.getAllUsers();
+    observable.subscribe(response => {
+
+      console.log(response)
+      this.userArray = response
+    }
+    );
   }
 
 }
